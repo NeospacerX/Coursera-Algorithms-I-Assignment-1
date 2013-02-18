@@ -19,6 +19,10 @@ public class PercolationStats {
     // Percolation object to get statistics.
     private Percolation p;
     
+    // To avoid same row,column pairs, we hold the already tried pairs in this
+    // array.
+    private int[][] triedRowColumnPairs;
+    
     // Number of open() calls. (without retries)
     private double numberOfTries = 0;
     
@@ -42,7 +46,8 @@ public class PercolationStats {
         
         mT = T;
         monteCarloResults = new double[T];
-
+        
+        
         /* StdRandom.uniform calls can produce same row:column pairs. 
            Let's try again if row:column pair is tried before. 
            I assume at N*N*2 calls are enough for percolation. */
@@ -51,15 +56,18 @@ public class PercolationStats {
             // Initialize Monte Carlo variables for experiment:
             p = new Percolation(N);
             numberOfTries = 0.0;
+            triedRowColumnPairs = new int[N][N];
             
             // Let's begin the experiment.
             for (int j = 0; j < N * N * 2; j++) {
-                if (p.isOpen(StdRandom.uniform(N) + 1, 
-                    StdRandom.uniform(N) + 1)) {
+                int row = StdRandom.uniform(N) + 1;
+                int column = StdRandom.uniform(N) + 1;
+                if (triedRowColumnPairs[row-1][column-1] == 1) {
                     continue;
                 } else {
+                    triedRowColumnPairs[row-1][column-1] = 1;
                     numberOfTries++;
-                    p.open(StdRandom.uniform(N) + 1, StdRandom.uniform(N) + 1);
+                    p.open(row, column);
                     if (p.percolates()) {
                         monteCarloResults[i] = numberOfTries/(N*N);
                         
@@ -72,6 +80,7 @@ public class PercolationStats {
             }
         }
         p = null;
+        triedRowColumnPairs = null;
     }
     
     /**
