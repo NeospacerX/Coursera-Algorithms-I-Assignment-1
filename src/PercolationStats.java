@@ -124,9 +124,9 @@ public class PercolationStats {
      *   smaller then 1.
      */
     public static void main(String[] args) {
-        int N = Integer.parseInt(args[0]);
-        int T = Integer.parseInt(args[1]);
-        PercolationStats pstats = new PercolationStats(N, T);
+        PercolationStats pstats = 
+            new PercolationStats(Integer.parseInt(args[0]), 
+                Integer.parseInt(args[1]));
         StdOut.println("mean\t\t\t = " + pstats.mean());
         StdOut.println("stddev\t\t\t = " + pstats.stddev());
         StdOut.println("95% confidence interval\t = " + pstats.confidenceLo()

@@ -106,16 +106,6 @@ public class Percolation {
     }
     
     /**
-     *   Test client for testing Percolation object.
-     *
-     */
-    public static void main(String[] args) {
-        Percolation p = new Percolation(10);
-        StdOut.println("Done.");
-
-    }
-    
-    /**
      *   Checks the row and column index by boundary conditions.  
      *
      *   @param int i: 1-based row index.
