@@ -17,20 +17,20 @@
 public class PercolationStats {
 	
 	// Percolation object to get statistics.
-	Percolation p;
+	private Percolation p;
 	
 	// To avoid same row,column pairs, we hold the already tried pairs in this
 	// array.
-	int[][] triedRowColumnPairs;
+	private int[][] triedRowColumnPairs;
 	
 	// Number of open() calls. (without retries)
-	double numberOfTries = 0;
+	private double numberOfTries = 0;
 	
 	// Result of each experiment is hold in this array.
-	double[] monteCarloResults;
+	private double[] monteCarloResults;
 	
 	// Parameter T which is given at creation.
-	int mT;
+	private int mT;
 	
 	/**
 	 *   Initializes PercolationStats, with NxN size Percolation Object and 
