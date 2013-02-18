@@ -19,10 +19,6 @@ public class PercolationStats {
     // Percolation object to get statistics.
     private Percolation p;
     
-    // To avoid same row,column pairs, we hold the already tried pairs in this
-    // array.
-    private int[][] triedRowColumnPairs;
-    
     // Number of open() calls. (without retries)
     private double numberOfTries = 0;
     
@@ -56,16 +52,14 @@ public class PercolationStats {
             // Initialize Monte Carlo variables for experiment:
             p = new Percolation(N);
             numberOfTries = 0.0;
-            triedRowColumnPairs = new int[N][N];
             
             // Let's begin the experiment.
             for (int j = 0; j < N * N * 2; j++) {
                 int row = StdRandom.uniform(N) + 1;
                 int column = StdRandom.uniform(N) + 1;
-                if (triedRowColumnPairs[row-1][column-1] == 1) {
+                if (p.isOpen(row, column)) {
                     continue;
                 } else {
-                    triedRowColumnPairs[row-1][column-1] = 1;
                     numberOfTries++;
                     p.open(row, column);
                     if (p.percolates()) {
