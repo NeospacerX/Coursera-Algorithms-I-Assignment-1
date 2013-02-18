@@ -42,8 +42,7 @@ public class PercolationStats {
         
         mT = T;
         monteCarloResults = new double[T];
-        
-        
+
         /* StdRandom.uniform calls can produce same row:column pairs. 
            Let's try again if row:column pair is tried before. 
            I assume at N*N*2 calls are enough for percolation. */
@@ -55,13 +54,12 @@ public class PercolationStats {
             
             // Let's begin the experiment.
             for (int j = 0; j < N * N * 2; j++) {
-                int row = StdRandom.uniform(N) + 1;
-                int column = StdRandom.uniform(N) + 1;
-                if (p.isOpen(row, column)) {
+                if (p.isOpen(StdRandom.uniform(N) + 1, 
+                    StdRandom.uniform(N) + 1)) {
                     continue;
                 } else {
                     numberOfTries++;
-                    p.open(row, column);
+                    p.open(StdRandom.uniform(N) + 1, StdRandom.uniform(N) + 1);
                     if (p.percolates()) {
                         monteCarloResults[i] = numberOfTries/(N*N);
                         
@@ -73,6 +71,7 @@ public class PercolationStats {
                 }
             }
         }
+        p = null;
     }
     
     /**
