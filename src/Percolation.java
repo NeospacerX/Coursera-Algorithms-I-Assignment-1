@@ -179,8 +179,8 @@ public class Percolation {
 		}
 		
 		
-		// Let's find neighbors of given element. 
-		// Check border conditions, if neighbor is open also, connect them.
+		/* Let's find neighbors of given element. 
+		 Check border conditions, if neighbor is open also, connect them.*/
 		if (row != 1) { // Above neighbor
 			if (isOpen(row-1, column)) {
 				connectSiteToNeighbor(siteIndex, row-1, column);
